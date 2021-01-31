@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 
 export default () => (
   <>
-    <StatusBar backgroundColor={Palette.blue} />
+    <StatusBar backgroundColor={Palette.cyan} />
     <Stack.Navigator headerMode="none" initialRouteName="Preload">
       <Stack.Screen name="Preload" component={Preload} />
       <Stack.Screen name="SignIn" component={SignIn} />
