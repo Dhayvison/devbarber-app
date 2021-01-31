@@ -5,6 +5,7 @@ import {StatusBar} from 'react-native';
 import Preload from '../pages/Preload/Preload';
 import SignIn from '../pages/SignIn/SignIn';
 import SignUp from '../pages/SignUp/SignUp';
+import MainTab from '../stacks/MainTab';
 
 import {Palette} from '../utils';
 
@@ -17,6 +18,7 @@ export default () => (
       <Stack.Screen name="Preload" component={Preload} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="MainTab" component={MainTab} />
     </Stack.Navigator>
   </>
 );
