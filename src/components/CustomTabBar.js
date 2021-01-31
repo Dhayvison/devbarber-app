@@ -13,7 +13,7 @@ import {UserContext} from '../contexts/UserContext';
 
 const TabArea = styled(View)`
   height: 60px;
-  background-color: ${Palette.cyan};
+  background-color: ${Palette.blue};
   flex-direction: row;
 `;
 
@@ -30,7 +30,7 @@ const TabItemCenter = styled(TouchableOpacity)`
   width: 70px;
   height: 70px;
   top: -20px;
-  border: 3px solid ${Palette.cyan};
+  border: 3px solid ${Palette.blue};
   border-radius: 45px;
   background-color: white;
 `;
@@ -66,7 +66,7 @@ export default ({state, navigation}) => {
         onPress={() => {
           navigate('Appointments');
         }}>
-        <TodaySVG width="24" height="24" fill={Palette.cyan} />
+        <TodaySVG width="24" height="24" fill={Palette.blue} />
       </TabItemCenter>
       <TabItem
         disabled={state.index === 3}

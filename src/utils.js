@@ -1,6 +1,6 @@
 export const Palette = {
   cyan: '#63C2D1',
-  blue: '#28587B',
+  blue: '#4EADBE',
   gray: '#353A47',
   yellow: '#FCFF4B',
   red: '#D76A03',
