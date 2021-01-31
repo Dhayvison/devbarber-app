@@ -5,20 +5,38 @@ import {useNavigation} from '@react-navigation/native';
 import FullScreenContainer from '../../components/FullScreenContainer';
 import {Wrapper, Loading} from './Preload.style';
 import BarberSVG from '../../assets/barber.svg';
+import Api from '../../api';
+import {UserContext} from '../../contexts/UserContext';
+import {setAvatar} from '../../contexts/actions/UserActions';
 
 export default () => {
+  const {dispatch} = React.useContext(UserContext);
   const {reset} = useNavigation();
 
   React.useEffect(() => {
     (async function checkToken() {
       const token = await AsyncStorage.getItem('token');
       if (token) {
-        //validar token
+        const json = await Api.checkToken(token);
+        console.info(json);
+        if (json.token) {
+          await AsyncStorage.setItem('token', json.token);
+          dispatch(setAvatar(json.data.avatar));
+          reset({
+            routes: [{name: 'MainTab'}],
+          });
+        } else {
+          reset({
+            routes: [{name: 'SignIn'}],
+          });
+        }
+        reset({
+          routes: [{name: 'MainTab'}],
+        });
       } else {
         reset({
           routes: [{name: 'SignIn'}],
         });
-        // navigate('SignIn');
       }
     })();
   }, []);

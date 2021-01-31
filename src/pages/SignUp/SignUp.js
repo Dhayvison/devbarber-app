@@ -1,6 +1,7 @@
 import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import Api from '../../api';
 import FullScreenContainer from '../../components/FullScreenContainer';
@@ -14,6 +15,8 @@ import {
   Strong,
   ErrorMessage,
 } from './SignUp.style';
+import {UserContext} from '../../contexts/UserContext';
+import {setAvatar} from '../../contexts/actions/UserActions';
 import {Palette} from '../../utils';
 import BarberSVG from '../../assets/barber.svg';
 import PersonSVG from '../../assets/person.svg';
@@ -21,6 +24,7 @@ import EmailSVG from '../../assets/email.svg';
 import LockSVG from '../../assets/lock.svg';
 
 export default () => {
+  const {dispatch} = React.useContext(UserContext);
   const {reset} = useNavigation();
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -41,13 +45,14 @@ export default () => {
     if (name && email && password) {
       const json = await Api.signUp(name, email, password);
 
-      if (json.error) {
-        setErro(json.error);
-      } else {
-        alert('Cadastro realizado com sucesso!');
+      if (json.token) {
+        await AsyncStorage.setItem('token', json.token);
+        dispatch(setAvatar(json.data.avatar));
         reset({
-          routes: [{name: 'SignIn'}],
+          routes: [{name: 'MainTab'}],
         });
+      } else {
+        setErro(json.error);
       }
     } else {
       setErro('Por favor, preencha todos os campos');

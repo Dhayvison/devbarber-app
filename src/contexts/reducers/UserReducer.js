@@ -1,3 +1,5 @@
+import {SET_AVATAR} from '../actions/UserActions';
+
 export const initialState = {
   avatar: '',
   favorites: [],
@@ -6,7 +8,7 @@ export const initialState = {
 
 export const UserReducer = (state, action) => {
   switch (action.type) {
-    case 'set-avatar':
+    case SET_AVATAR:
       return {...state, avatar: action.payload.avatar};
     default:
       return state;

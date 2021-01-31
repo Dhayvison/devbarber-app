@@ -1,6 +1,7 @@
 import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import Api from '../../api';
 import FullScreenContainer from '../../components/FullScreenContainer';
@@ -14,12 +15,15 @@ import {
   Strong,
   ErrorMessage,
 } from './SignIn.style';
+import {UserContext} from '../../contexts/UserContext';
+import {setAvatar} from '../../contexts/actions/UserActions';
 import {Palette} from '../../utils';
 import BarberSVG from '../../assets/barber.svg';
 import EmailSVG from '../../assets/email.svg';
 import LockSVG from '../../assets/lock.svg';
 
 export default () => {
+  const {dispatch} = React.useContext(UserContext);
   const {reset} = useNavigation();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -39,6 +43,11 @@ export default () => {
       const json = await Api.signIn(email, password);
 
       if (json.token) {
+        await AsyncStorage.setItem('token', json.token);
+        dispatch(setAvatar(json.data.avatar));
+        reset({
+          routes: [{name: 'MainTab'}],
+        });
       } else {
         setErro(json.error);
       }
