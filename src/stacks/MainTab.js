@@ -6,11 +6,14 @@ import Search from '../pages/Search/Search';
 import Appointments from '../pages/Appointments/Appointments';
 import Favorites from '../pages/Favorites/Favorites';
 import Profile from '../pages/Profile/Profile';
+import CustomTabBar from '../components/CustomTabBar';
 
 const Tab = createBottomTabNavigator();
 
 export default () => (
-  <Tab.Navigator>
+  <Tab.Navigator
+    initialRouteName="Appointments"
+    tabBar={(props) => <CustomTabBar {...props} />}>
     <Tab.Screen name="Home" component={Home} />
     <Tab.Screen name="Search" component={Search} />
     <Tab.Screen name="Appointments" component={Appointments} />
