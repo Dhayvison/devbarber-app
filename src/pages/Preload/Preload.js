@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 
