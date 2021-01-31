@@ -18,7 +18,6 @@ export default () => {
       const token = await AsyncStorage.getItem('token');
       if (token) {
         const json = await Api.checkToken(token);
-        console.info(json);
         if (json.token) {
           await AsyncStorage.setItem('token', json.token);
           dispatch(setAvatar(json.data.avatar));
