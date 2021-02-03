@@ -13,14 +13,13 @@ export const Wrapper = styled(View)`
   align-items: center;
   justify-content: space-between;
   padding: 40px;
-  background-color: ${Palette.cyan};
+  background-color: ${Palette.blue};
 `;
 
 export const UserInfo = styled(ImageBackground)`
   width: 100%;
   align-items: center;
   padding: 60px 40px;
-  background-color: ${Palette.blue};
   border-radius: 30px;
   overflow: hidden;
 `;
