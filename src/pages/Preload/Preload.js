@@ -7,7 +7,7 @@ import {Wrapper, Loading} from './Preload.style';
 import BarberSVG from '../../assets/barber.svg';
 import Api from '../../api';
 import {UserContext} from '../../contexts/UserContext';
-import {setAvatar} from '../../contexts/actions/UserActions';
+import {setUser} from '../../contexts/actions/UserActions';
 
 export default () => {
   const {dispatch} = React.useContext(UserContext);
@@ -20,7 +20,7 @@ export default () => {
         const json = await Api.checkToken(token);
         if (json.token) {
           await AsyncStorage.setItem('token', json.token);
-          dispatch(setAvatar(json.data.avatar));
+          dispatch(setUser(json.data));
           reset({
             routes: [{name: 'MainTab'}],
           });
