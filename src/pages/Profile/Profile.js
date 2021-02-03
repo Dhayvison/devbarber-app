@@ -39,7 +39,7 @@ export default () => {
 
   return (
     <Wrapper>
-      <UserInfo source={{uri: user.avatar}} imageStyle={{opacity: 0.1}}>
+      <UserInfo>
         <UserAvatar source={{uri: user.avatar}} />
         <UserName>{user.name}</UserName>
         <UserEmail>{user.email}</UserEmail>

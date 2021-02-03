@@ -1,10 +1,4 @@
-import {
-  Image,
-  ImageBackground,
-  Text,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {Image, Text, TouchableHighlight, View} from 'react-native';
 import styled from 'styled-components';
 import {Palette} from '../../utils';
 
@@ -16,7 +10,7 @@ export const Wrapper = styled(View)`
   background-color: ${Palette.blue};
 `;
 
-export const UserInfo = styled(ImageBackground)`
+export const UserInfo = styled(View)`
   width: 100%;
   align-items: center;
   padding: 60px 40px;
