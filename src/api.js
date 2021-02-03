@@ -17,6 +17,7 @@ export default {
     const json = await req.json();
     return json;
   },
+
   signIn: async (email, password) => {
     const req = await fetch(`${BASE_API}/auth/login`, {
       method: 'POST',
@@ -27,6 +28,7 @@ export default {
     const json = await req.json();
     return json;
   },
+
   signUp: async (name, email, password) => {
     const req = await fetch(`${BASE_API}/user`, {
       method: 'POST',
@@ -37,6 +39,30 @@ export default {
     const json = await req.json();
     return json;
   },
+
+  logOut: async () => {
+    const token = await AsyncStorage.getItem('token');
+    const req = await fetch(`${BASE_API}/auth/logout`, {
+      method: 'POST',
+      headers: HEADERS,
+      body: JSON.stringify({token}),
+    });
+
+    const json = await req.json();
+    return json;
+  },
+
+  getBarber: async (id) => {
+    const token = await AsyncStorage.getItem('token');
+    const req = await fetch(`${BASE_API}/barber/${id}?token=${token}`, {
+      method: 'GET',
+      headers: HEADERS,
+    });
+
+    const json = await req.json();
+    return json;
+  },
+
   getBarbers: async (lat = null, lng = null, address = null) => {
     const token = await AsyncStorage.getItem('token');
     const req = await fetch(
