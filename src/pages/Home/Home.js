@@ -45,8 +45,24 @@ export default () => {
     setIsLoading(false);
   }
 
+  async function handleLocationSearch() {
+    console.info('Acabou');
+    setIsLoading(true);
+    setCoords(null);
+    getBarbers();
+    setIsLoading(false);
+  }
+
   async function getBarbers() {
-    const json = await Api.getBarbers();
+    let lat = null;
+    let lng = null;
+
+    if (coords) {
+      lat = coords.latitude;
+      lng = coords.longitude;
+    }
+
+    const json = await Api.getBarbers(lat, lng, locationText);
 
     if (json.error === '') {
       setBarbers(json.data);
@@ -92,6 +108,7 @@ export default () => {
             onChangeText={(text) => {
               setLocationText(text);
             }}
+            onEndEditing={handleLocationSearch}
           />
           <LocationFinder
             disabled={isLoading}
